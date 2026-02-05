@@ -1,0 +1,402 @@
+{
+  "uuid": "073eb762-87e3-3157-b375-e48a058eaa3c",
+  "display": "PHQ-9",
+  "name": "encounter.phq9",
+  "description": "PHQ-9 Form",
+  "encounter": "encounter.phq9",
+  "version": "0.1",
+  "build": null,
+  "published": true,
+  "formFields": [],
+  "retired": false,
+  "pages": [
+    {
+      "label": "Encounter Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "label": "Provider:",
+              "id": "provider",
+              "required": "true",
+              "default": "",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "hide": {
+                "hideWhenExpression": "true"
+              }
+            },
+            {
+              "label": "Date Of Assessment",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "PHQ-9",
+      "sections": [
+        {
+          "label": "PHQ-9",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "questionOptions": {
+                "customControl": true,
+                "html": "<label><t>phq9FormIntroduction</t></label>"
+              },
+              "customControlConfig": {
+                "tag": "afe-content-html",
+                "url": "/ui/ampath-custom-components.bundled.js",
+                "module": "true"
+              }
+            },
+            {
+              "id": "q1",
+              "type": "obs",
+              "prefix": "1. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "673a6b11-e98a-4469-8032-dfe05fad91d2",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "score": {
+                "b95f6a5d-78ae-4f59-9fcf-d18e01196028": 0,
+                "b95f6a5d-78ae-4f59-9fcf-d18e01186010": 1,
+                "b95f6a5d-78ae-4f59-9fcf-d18e01186011": 2,
+                "b95f6a5d-78ae-4f59-9fcf-d18e01186012": 3
+              }
+            },
+            {
+              "type": "obs",
+              "prefix": "2. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "af2b5136-e16d-49f0-a803-d5eedc76636c",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q2"
+            },
+            {
+              "type": "obs",
+              "prefix": "3. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "e8cc4593-f717-4223-ac76-50b13e6e56e8",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q3"
+            },
+            {
+              "prefix": "4. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "730ad200-882f-433e-9e65-23b00ed808a5",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q4"
+            },
+            {
+              "prefix": "5. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "07727b9f-8599-4ce3-a43f-73d1694e70c7",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q5"
+            },
+            {
+              "prefix": "6. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "d43cf4c6-d3b9-4160-8850-406fca3debda",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q6"
+            },
+            {
+              "prefix": "7. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "d379c9f3-4214-42c0-bc9b-ecdd52084675",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q7"
+            },
+            {
+              "prefix": "8. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "72eaf57d-5d2c-43a7-add1-8d5134d53156",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q8"
+            },
+            {
+              "prefix": "9. ",
+              "type": "obs",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "59ae8e9b-347d-4476-bca4-c420ee2a3a0b",
+                "answers": [
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01196028"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186010"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186011"
+                  },
+                  {
+                    "concept": "b95f6a5d-78ae-4f59-9fcf-d18e01186012"
+                  }
+                ]
+              },
+              "id": "q9"
+            },
+            {
+              "id": "formCompleteness",
+              "type": "obs",
+              "required": "true",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "cb22cf53-a9d9-4923-947e-281694a54f0e",
+                "answers": [
+                  {
+                    "concept": "6cf29178-21a8-4737-89b3-49bb3f141c89"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "q1 && q2 && q3 && q4 && q5 && q6 && q7 && q8 && q9 ? '6cf29178-21a8-4737-89b3-49bb3f141c89': '163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Score",
+      "sections": [
+        {
+          "label": "Score",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "questionOptions": {
+                "customControl": true,
+                "data": [
+                  ["Score", "Depression Severity", "Action"],
+                  ["0-4", "None-minimal ", "Patient may not need depression treatment."],
+                  ["5-9", "Mild", "Use clinical judgment about treatment, based on patient’s duration of symptoms and functional impairment."],
+                  ["10-14", "Moderate", "Use clinical judgment about treatment, based on patient’s duration of symptoms and functional impairment."],
+                  ["15-19", "Moderately severe", "Treat using antidepressants, psychotherapy or a combination of treatment."],
+                  ["20-27", "Severe", "Treat using antidepressants with or without psychotherapy."]
+                ]
+              },
+              "customControlConfig": {
+                "tag": "afe-content-table",
+                "url": "/ui/ampath-custom-components.bundled.js",
+                "module": "true"
+              }
+            },
+            {
+              "id": "phq9Score",
+              "type": "obs",
+              "readOnly": "true",
+              "questionOptions": {
+                "concept": "b7692d72-312e-4896-9ecb-c392d697f918",
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "(FORM.q1.score[q1] || 0) + (FORM.q1.score[q2] || 0) + (FORM.q1.score[q3] || 0) + (FORM.q1.score[q4] || 0) + (FORM.q1.score[q5] || 0) + (FORM.q1.score[q6] || 0) + (FORM.q1.score[q7] || 0) + (FORM.q1.score[q8] || 0) + (FORM.q1.score[q9] || 0)"
+                }
+              }
+            },
+            {
+              "id": "phq9Severity",
+              "type": "obs",
+              "readOnly": "true",
+              "questionOptions": {
+                "concept": "7c613ad9-5cb5-4d83-8a5a-6d6eadde061d",
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "phq9Score <= 4 ? 'None-minimal' : phq9Score <= 9 ? 'Mild' : phq9Score <= 14 ? 'Moderate' : phq9Score <= 19 ? 'Moderately severe' : 'Severe'"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comments",
+      "sections": [
+        {
+          "label": "Comments",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "id": "comment",
+              "questionOptions": {
+                "concept": "b8a853bf-80a3-4344-a730-fd6c46165014",
+                "rendering": "textarea",
+                "rows": 4
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

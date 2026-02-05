@@ -1,0 +1,393 @@
+{
+  "uuid": "114ddec9-3109-4819-b8d7-08d9bf7b37c9",
+  "display": "CRIES-8",
+  "name": "encounter.cries8Form",
+  "description": "CRIES-8 Form",
+  "encounter": "encounter.cries8Form",
+  "version": "0.11",
+  "build": null,
+  "published": true,
+  "formFields": [],
+  "retired": false,
+  "pages": [
+    {
+      "label": "Encounter Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "label": "Provider:",
+              "id": "provider",
+              "required": "true",
+              "default": "",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "hide": {
+                "hideWhenExpression": "true"
+              }
+            },
+            {
+              "questionOptions": {
+                "customControl": true,
+                "html": "<label><p><t>cries8FormIntroduction</t></p></label>"
+              },
+              "customControlConfig": {
+                "tag": "afe-content-html",
+                "url": "/ui/ampath-custom-components.bundled.js",
+                "module": "true"
+              }
+            },
+            {
+              "label": "Date Of Assessment",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "CRIES-8",
+      "sections": [
+        {
+          "label": "Children Revised Impact Event Scale (CRIES-8)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "questionOptions": {
+                "customControl": true,
+                "html": "<label><p><t>criesFormDescription</t></p></label>"
+              },
+              "customControlConfig": {
+                "tag": "afe-content-html",
+                "url": "/ui/ampath-custom-components.bundled.js",
+                "module": "true"
+              }
+            },
+            {
+              "id": "q1",
+              "type": "obs",
+              "prefix": "1. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001330",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              },
+              "score": {
+                "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": 0,
+                "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": 1,
+                "ecf13d6f-db24-40b7-887c-989fca25b920": 3,
+                "cdc19338-9054-4a11-b7f2-9f63e57a4ddf": 5
+              }
+            },
+            {
+              "id": "q2",
+              "type": "obs",
+              "prefix": "2. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001331",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q3",
+              "type": "obs",
+              "prefix": "3. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001332",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q4",
+              "type": "obs",
+              "prefix": "4. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001333",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q5",
+              "type": "obs",
+              "prefix": "5. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001334",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q6",
+              "type": "obs",
+              "prefix": "6. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001335",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q7",
+              "type": "obs",
+              "prefix": "7. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001336",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "q8",
+              "type": "obs",
+              "prefix": "8. ",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "f31caab2-345a-11e9-b210-d66k23001337",
+                "answers": [
+                  {
+                    "concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "159416AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "ecf13d6f-db24-40b7-887c-989fca25b920"
+                  },
+                  {
+                    "concept": "cdc19338-9054-4a11-b7f2-9f63e57a4ddf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "formCompleteness",
+              "type": "obs",
+              "required": "true",
+              "questionOptions": {
+                "orientation": "horizontal",
+                "rendering": "radio",
+                "allowUnselect": "true",
+                "concept": "cb22cf53-a9d9-4923-947e-281694a54f0e",
+                "answers": [
+                  {
+                    "concept": "6cf29178-21a8-4737-89b3-49bb3f141c89"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "q1 && q2 && q3 && q4 && q5 && q6 && q7 && q8 ? '6cf29178-21a8-4737-89b3-49bb3f141c89': '163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Score",
+      "sections": [
+        {
+          "label": "CRIES-8",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "questionOptions": {
+                "customControl": true,
+                "html": "<label><p><t>cries8ScoreDescription</t></p></label>"
+              },
+              "customControlConfig": {
+                "tag": "afe-content-html",
+                "url": "/ui/ampath-custom-components.bundled.js",
+                "module": "true"
+              }
+            },
+            {
+              "id": "intrusionScore",
+              "readOnly": "true",
+              "type": "obs",
+              "questionOptions": {
+                "concept": "f4bf6cf6-9058-47b9-802b-9ecfaae2eb93",
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "(FORM.q1.score[q1] || 0) + (FORM.q1.score[q3] || 0) + (FORM.q1.score[q6] || 0) + (FORM.q1.score[q7] || 0)"
+                }
+              }
+            },
+            {
+              "id": "avoidanceScore",
+              "readOnly": "true",
+              "type": "obs",
+              "questionOptions": {
+                "concept": "0894c256-8e1b-4bdd-baa1-a10fd47f7a4d",
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "(FORM.q1.score[q2] || 0) + (FORM.q1.score[q4] || 0) + (FORM.q1.score[q5] || 0) + (FORM.q1.score[q8] || 0)"
+                }
+              }
+            },
+            {
+              "id": "totalScore",
+              "readOnly": "true",
+              "type": "obs",
+              "questionOptions": {
+                "concept": "8b7044b2-ced4-4ba5-a9b1-b7f4994fcec6",
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "(FORM.q1.score[q1] || 0) + (FORM.q1.score[q2] || 0) + (FORM.q1.score[q3] || 0) + (FORM.q1.score[q4] || 0) + (FORM.q1.score[q5] || 0) + (FORM.q1.score[q6] || 0) + (FORM.q1.score[q7] || 0) + (FORM.q1.score[q8] || 0)"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comments",
+      "sections": [
+        {
+          "label": "Comments",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "id": "comment",
+              "questionOptions": {
+                "concept": "b8a853bf-80a3-4344-a730-fd6c46165014",
+                "rendering": "textarea",
+                "rows": 4
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}
