@@ -183,6 +183,7 @@ class AmpathMapper(MapperInterface):
         q_id = q_json.get("id", str(uuid.uuid4()))
         opts = q_json.get("questionOptions", {})
         concept_uuid = opts.get("concept", "UNKNOWN-CONCEPT")
+        question_text = self._resolve_question_text(q_json)
         
         # A. The Wrapper Group (Extraction Context)
         wrapper = {
@@ -215,14 +216,14 @@ class AmpathMapper(MapperInterface):
         input_item = {
             "linkId": q_id,
             "type": input_type,
-            "text": q_json.get("label", "Question"),
+            "text": question_text,
             "required": q_json.get("required") == "true"
         }
         
         if "prefix" in q_json:
             input_item["prefix"] = q_json["prefix"]
 
-        self._inject_translation(input_item, input_item["text"])
+        self._inject_translation(input_item, question_text)
         self._add_item_control(input_item, q_json)
 
         # Handle Answers (Choices)
@@ -263,11 +264,11 @@ class AmpathMapper(MapperInterface):
             "type": "choice",
             "definition": "http://hl7.org/fhir/StructureDefinition/Observation#Observation.code",
             "extension": [{"url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden", "valueBoolean": True}],
-            "initial": [{"valueCoding": {"code": concept_uuid, "display": input_item["text"]}}]
+            "initial": [{"valueCoding": {"code": concept_uuid, "display": question_text}}]
         }
         
         # Add Translations to hidden item display just in case
-        self._inject_translation(hidden_item["initial"][0]["valueCoding"], input_item["text"], is_display=True)
+        self._inject_translation(hidden_item["initial"][0]["valueCoding"], question_text, is_display=True)
 
         inner_group["item"].append(input_item)
         inner_group["item"].append(hidden_item)
@@ -290,14 +291,38 @@ class AmpathMapper(MapperInterface):
 
     def _create_simple_input(self, q_json, fhir_type):
         """For non-Obs fields like Encounter Date."""
+        question_text  = self._resolve_question_text(q_json)
         item = {
             "linkId": q_json.get("id"),
             "type": fhir_type,
-            "text": q_json.get("label"),
+            "text": question_text,
             "required": q_json.get("required") == "true"
         }
-        self._inject_translation(item, item["text"])
+        self._inject_translation(item, question_text)
         return item
+        
+    def _resolve_question_text(self, q_json):
+        """Determines question text with consistent precedence and blank handling."""
+        opts = q_json.get("questionOptions", {})
+
+        display = opts.get("display")
+        if isinstance(display, str) and display.strip():
+            return display.strip()
+
+        label = q_json.get("label")
+        if isinstance(label, str) and label.strip():
+            return label.strip()
+
+        concept_uuid = opts.get("concept")
+        if isinstance(concept_uuid, str) and concept_uuid.strip():
+            try:
+                concept_name = self.db.get_concept_name(concept_uuid.strip())
+                if isinstance(concept_name, str) and concept_name.strip():
+                    return concept_name.strip()
+            except Exception:
+                pass
+
+        return "Question"
 
     def _determine_fhir_type(self, q_json):
         """Determines FHIR type checking 'rendering' option."""
