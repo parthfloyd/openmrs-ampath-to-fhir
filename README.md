@@ -28,6 +28,10 @@ openmrs-ampath-to-fhir is a lightweight converter that transforms AMPATH OpenMRS
 6. Review results:
    - Generated FHIR Questionnaire JSON files are written to `output/` as `fhir_<original>.json`.
 
+## Translation precedence
+- Concept dictionary language translations from OpenMRS are authoritative and are prioritized over Gemini translations.
+- Gemini is used only as a fallback for missing locales or missing concept-linked text entries.
+
 ## Contributing & Issues
 - Found a bug or have a feature request? Please open an issue with details and reproducible steps.
 - Contributions are welcome! Fork the repository, create a branch, and submit a pull request describing your changes.

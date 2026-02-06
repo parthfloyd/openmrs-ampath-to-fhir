@@ -8,6 +8,7 @@ class AmpathMapper(MapperInterface):
         super().__init__(config, db_service, translation_service)
         self.variables = []
         self.translation_cache = {}
+        self.text_to_concept_uuid = {}
 
     def transform(self, source_json):
         """
@@ -18,14 +19,16 @@ class AmpathMapper(MapperInterface):
         """
         self.variables = []
         self.translation_cache = {}
+        self.text_to_concept_uuid = {}
 
         # --- STEP 1: HARVEST STRINGS ---
         print("   [Mapper] Harvesting strings for translation...")
         all_strings = self._harvest_strings(source_json)
-        
-        # --- STEP 2: BATCH TRANSLATE ---
+        self._capture_concept_mappings(source_json)
+
+        # --- STEP 2: BUILD TRANSLATION CACHE (Dictionary first, Gemini fallback) ---
         if all_strings:
-            self.translation_cache = self.ts.batch_translate(all_strings, self.config.locales)
+            self.translation_cache = self._build_translation_cache(all_strings)
 
         # --- STEP 3: TRANSFORM (Standard Logic) ---
         print("   [Mapper] Generating FHIR resources...")
@@ -117,6 +120,59 @@ class AmpathMapper(MapperInterface):
                 strings.extend(self._harvest_strings(item))
                 
         return strings
+
+    def _capture_concept_mappings(self, node):
+        if isinstance(node, dict):
+            opts = node.get("questionOptions", {})
+            question_concept_uuid = opts.get("concept")
+            question_label = node.get("label")
+            if question_label and question_concept_uuid:
+                self.text_to_concept_uuid.setdefault(question_label, question_concept_uuid)
+
+            for ans in opts.get("answers", []):
+                answer_label = ans.get("label")
+                answer_concept_uuid = ans.get("concept")
+                if answer_label and answer_concept_uuid:
+                    self.text_to_concept_uuid.setdefault(answer_label, answer_concept_uuid)
+
+            for value in node.values():
+                self._capture_concept_mappings(value)
+        elif isinstance(node, list):
+            for item in node:
+                self._capture_concept_mappings(item)
+
+    def _build_translation_cache(self, all_strings):
+        unique_strings = list(dict.fromkeys(s for s in all_strings if isinstance(s, str) and s.strip()))
+        translation_cache = {text: {} for text in unique_strings}
+
+        remaining_by_locale = {text: set(self.config.locales) for text in unique_strings}
+
+        for text in unique_strings:
+            concept_uuid = self.text_to_concept_uuid.get(text)
+            if not concept_uuid:
+                continue
+
+            try:
+                concept_translations = self.db.get_concept_translations(concept_uuid)
+            except Exception:
+                concept_translations = {}
+
+            for locale, value in (concept_translations or {}).items():
+                if locale in remaining_by_locale[text] and isinstance(value, str) and value.strip():
+                    translation_cache[text][locale] = value.strip()
+                    remaining_by_locale[text].discard(locale)
+
+        texts_for_gemini = [text for text in unique_strings if remaining_by_locale[text]]
+
+        if texts_for_gemini:
+            gemini_translations = self.ts.batch_translate(texts_for_gemini, self.config.locales)
+            for text in texts_for_gemini:
+                for locale in list(remaining_by_locale[text]):
+                    value = gemini_translations.get(text, {}).get(locale)
+                    if isinstance(value, str) and value.strip():
+                        translation_cache[text][locale] = value
+
+        return translation_cache
 
     def _process_group(self, group_json, is_page=False):
         """Handles Pages and Sections recursively."""
@@ -222,7 +278,11 @@ class AmpathMapper(MapperInterface):
         if "prefix" in q_json:
             input_item["prefix"] = q_json["prefix"]
 
-        self._inject_translation(input_item, input_item["text"])
+        question_text = input_item["text"]
+        if question_text and concept_uuid:
+            self.text_to_concept_uuid.setdefault(question_text, concept_uuid)
+
+        self._inject_translation(input_item, question_text)
         self._add_item_control(input_item, q_json)
 
         # Handle Answers (Choices)
@@ -237,7 +297,11 @@ class AmpathMapper(MapperInterface):
                 }
                 # Translate Answer Options
                 if "label" in ans:
-                     self._inject_translation(opt["valueCoding"], ans["label"], is_root=False, is_display=True)
+                    answer_text = ans["label"]
+                    answer_concept_uuid = ans.get("concept")
+                    if answer_text and answer_concept_uuid:
+                        self.text_to_concept_uuid.setdefault(answer_text, answer_concept_uuid)
+                    self._inject_translation(opt["valueCoding"], answer_text, is_root=False, is_display=True)
                 
                 input_item["answerOption"].append(opt)
             

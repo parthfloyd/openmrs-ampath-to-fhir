@@ -15,7 +15,8 @@ This project converts AMPATH OpenMRS form JSON into FHIR R4 Questionnaire resour
    - `src/main.py` scans the `input/` directory for `*.json` files.
 4. **Translation preparation**
    - The mapper recursively harvests all translatable strings from the form JSON (labels, HTML instructions, answer labels).
-   - Strings are deduplicated and batched for translation (if Gemini is configured).
+   - Strings are deduplicated and checked against concept dictionary translations first.
+   - Concept dictionary language translations are authoritative and are prioritized over Gemini translations; Gemini is fallback for missing entries/locales.
 5. **Transformation to FHIR**
    - The mapper builds a FHIR `Questionnaire`:
      - Root metadata includes `resourceType`, `id`, `title`, `status`, `subjectType`, and `code` entries.
